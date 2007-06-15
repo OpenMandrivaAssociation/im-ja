@@ -6,6 +6,7 @@ License:	GPL
 Group:		System/Libraries
 URL:		http://im-ja.sourceforge.net/
 Source:		http://im-ja.sourceforge.net/%{name}-%{version}.tar.bz2
+Patch1:		im-ja-1.5-schemasdir.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Conflicts:	kinput2-wnn4 uim
 BuildRequires:	gnome-panel-devel
@@ -43,6 +44,7 @@ non-GTK2 applications.
 
 %prep
 %setup -q
+%patch1 -p1
 
 %build
 %configure2_5x --disable-schemas-install --disable-wnn
@@ -103,7 +105,6 @@ fi
 %{_sysconfdir}/gconf/schemas/*
 %{_libdir}/bonobo/servers/*
 %{_datadir}/%name
-%{_datadir}/control-center-2.0/capplets/*
 %{_datadir}/gnome-2.0/ui/*
 %{_datadir}/pixmaps/*
 %{_datadir}/applications/*.desktop
