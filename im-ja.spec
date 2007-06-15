@@ -1,6 +1,6 @@
 Name:		im-ja
 Summary:	Japanese input module for GTK2
-Version:	1.4
+Version:	1.5
 Release:	%mkrel 1
 License:	GPL
 Group:		System/Libraries
@@ -11,11 +11,11 @@ Conflicts:	kinput2-wnn4 uim
 BuildRequires:	gnome-panel-devel
 BuildRequires:	canna-devel
 BuildRequires:	anthy-devel
-BuildRequires:	ImageMagick
 BuildRequires:	docbook-utils
 BuildRequires:	perl-XML-Parser
 Requires:	locales-ja
-Prereq:		%_bindir/gtk-query-immodules-2.0
+Requires(post,postun):	%_bindir/gtk-query-immodules-2.0
+Requires(post,preun):	GConf2
 Requires:	gtk+2.0 >= 2.4.4-2mdk
 
 %description
@@ -48,10 +48,6 @@ non-GTK2 applications.
 %configure2_5x --disable-schemas-install --disable-wnn
 %make
 
-/usr/bin/convert -resize 48x48 gnome/im-ja-capplet.png %{name}-conf48.png
-/usr/bin/convert -resize 32x32 gnome/im-ja-capplet.png %{name}-conf32.png
-/usr/bin/convert -resize 16x16 gnome/im-ja-capplet.png %{name}-conf16.png
-
 %install
 rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
@@ -61,22 +57,6 @@ rm -f %{buildroot}/%{_libdir}/gtk-2.0/*/immodules/*.la
 
 %find_lang %{name}
 
-# Menu entry
-mkdir -p %buildroot/%_menudir
-cat << EOF > %buildroot/%_menudir/%name
-?package(%name): needs="gnome"\
- section="Configuration/GNOME"\
- title="Im-Ja Configurator"\
- longtitle="Configurator for the GTK+2 Japanese Input Module"\
- command="%_bindir/%{name}-conf"\
- icon="%{name}-conf.png"
-EOF
-
-%__install -D -m 644 %{name}-conf48.png %buildroot/%_liconsdir/%{name}-conf.png
-%__install -D -m 644 %{name}-conf32.png %buildroot/%_iconsdir/%{name}-conf.png
-%__install -D -m 644 %{name}-conf16.png %buildroot/%_miconsdir/%{name}-conf.png
-
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -85,7 +65,6 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/im-ja.schemas > /dev/null
-%update_menus
 
 %preun
 if [ "$1" = "0" ]; then
@@ -95,8 +74,6 @@ fi
 %postun
 /sbin/ldconfig
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
-%clean_menus
-
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -116,7 +93,3 @@ fi
 %{_datadir}/gnome-2.0/ui/*
 %{_datadir}/pixmaps/*
 %{_mandir}/man1/*
-%{_menudir}/*
-%{_iconsdir}/*.png
-%{_miconsdir}/*.png
-%{_liconsdir}/*.png
