@@ -58,7 +58,7 @@ rm -f %{buildroot}/%{_libdir}/gtk-2.0/*/immodules/*.la
 %find_lang %{name}
 
 # xdg menu entry
-mkdir -p %buildroot%_datadir/applications/mandriva-%{name}.desktop
+mkdir -p %buildroot%_datadir/applications
 cat << EOF > %buildroot%_datadir/applications/mandriva-%{name}.desktop
 [Desktop Entry]
 Name=Im-Ja configurator
