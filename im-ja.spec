@@ -57,6 +57,18 @@ rm -f %{buildroot}/%{_libdir}/gtk-2.0/*/immodules/*.la
 
 %find_lang %{name}
 
+# xdg menu entry
+mkdir -p %buildroot%_datadir/applications/mandriva-%{name}.desktop
+cat << EOF > %buildroot%_datadir/applications/mandriva-%{name}.desktop
+[Desktop Entry]
+Name=Im-Ja configurator
+Comment=Configurator for the GTK+2 Japanese Input Module
+Exec=/usr/bin/im-ja-conf
+Icon=%{name}-conf.png
+Type=Application
+Categories=GTK;Settings;Languages;
+EOF
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -65,6 +77,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/im-ja.schemas > /dev/null
+%update_menus
 
 %preun
 if [ "$1" = "0" ]; then
@@ -74,6 +87,7 @@ fi
 %postun
 /sbin/ldconfig
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+%clean_menus
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
@@ -92,4 +106,5 @@ fi
 %{_datadir}/control-center-2.0/capplets/*
 %{_datadir}/gnome-2.0/ui/*
 %{_datadir}/pixmaps/*
+%{_datadir}/applications/*.desktop
 %{_mandir}/man1/*
