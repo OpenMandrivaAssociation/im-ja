@@ -66,7 +66,7 @@ cat << EOF > %buildroot%_datadir/applications/mandriva-%{name}.desktop
 Name=Im-Ja configurator
 Comment=Configurator for the GTK+2 Japanese Input Module
 Exec=/usr/bin/im-ja-conf
-Icon=%{name}-conf.png
+Icon=%{name}-conf
 Type=Application
 Categories=GTK;Settings;Languages;
 EOF
