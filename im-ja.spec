@@ -7,7 +7,6 @@ Group:		System/Libraries
 URL:		http://im-ja.sourceforge.net/
 Source:		http://im-ja.sourceforge.net/%{name}-%{version}.tar.bz2
 Patch1:		im-ja-1.5-schemasdir.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-root
 Conflicts:	kinput2-wnn4 uim
 BuildRequires:	gnome-panel-devel
 BuildRequires:	canna-devel
