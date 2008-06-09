@@ -76,7 +76,9 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %post
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/im-ja.schemas > /dev/null
 %update_menus
@@ -87,7 +89,9 @@ GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-un
 fi
 
 %postun
+%if %mdkversion < 200900
 /sbin/ldconfig
+%endif
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
 %clean_menus
 
