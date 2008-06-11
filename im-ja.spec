@@ -80,7 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %endif
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
-GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/im-ja.schemas > /dev/null
+%post_install_gconf_schemas im-ja
 %update_menus
 
 %preun
