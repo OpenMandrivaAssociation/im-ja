@@ -84,9 +84,7 @@ rm -rf $RPM_BUILD_ROOT
 %update_menus
 
 %preun
-if [ "$1" = "0" ]; then
-GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/im-ja.schemas > /dev/null
-fi
+%preun_uninstall_gconf_schemas im-ja
 
 %postun
 %if %mdkversion < 200900
