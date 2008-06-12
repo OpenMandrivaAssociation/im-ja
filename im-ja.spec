@@ -80,8 +80,10 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %endif
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+%if %mdkversion < 200900
 %post_install_gconf_schemas im-ja
 %update_menus
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas im-ja
@@ -91,7 +93,9 @@ rm -rf $RPM_BUILD_ROOT
 /sbin/ldconfig
 %endif
 %{_bindir}/gtk-query-immodules-2.0 %_lib > %{_sysconfdir}/gtk-2.0/gtk.immodules.%_lib
+%if %mdkversion < 200900
 %clean_menus
+%endif
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
