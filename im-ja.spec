@@ -14,6 +14,7 @@ BuildRequires:	canna-devel
 BuildRequires:	anthy-devel
 BuildRequires:	docbook-utils
 BuildRequires:	perl-XML-Parser
+BuildRequires:	libglade2-devel
 Requires:	locales-ja
 Requires(post,postun):	%_bindir/gtk-query-immodules-2.0
 Requires(post,preun):	GConf2
