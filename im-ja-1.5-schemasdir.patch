@@ -1,0 +1,21 @@
+diff -ur im-ja-1.5.old/data/Makefile.am im-ja-1.5/data/Makefile.am
+--- im-ja-1.5.old/data/Makefile.am	2007-06-15 13:21:59.000000000 +0800
++++ im-ja-1.5/data/Makefile.am	2007-06-15 13:22:12.000000000 +0800
+@@ -1,4 +1,4 @@
+-schemasdir	 = $(datadir)/gconf/schemas
++schemasdir	 = $(sysconfdir)/gconf/schemas
+ schemas_in_files = im-ja.schemas.in
+ schemas_DATA 	 = $(schemas_in_files:.schemas.in=.schemas)
+ @INTLTOOL_SCHEMAS_RULE@
+diff -ur im-ja-1.5.old/data/Makefile.in im-ja-1.5/data/Makefile.in
+--- im-ja-1.5.old/data/Makefile.in	2007-06-15 13:21:59.000000000 +0800
++++ im-ja-1.5/data/Makefile.in	2007-06-15 13:22:31.000000000 +0800
+@@ -237,7 +237,7 @@
+ sharedstatedir = @sharedstatedir@
+ sysconfdir = @sysconfdir@
+ target_alias = @target_alias@
+-schemasdir = $(datadir)/gconf/schemas
++schemasdir = $(sysconfdir)/gconf/schemas
+ schemas_in_files = im-ja.schemas.in
+ schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
+ CLEANFILES = *.bak $(schemas_DATA)
