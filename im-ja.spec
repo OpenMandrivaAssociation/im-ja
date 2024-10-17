@@ -4,7 +4,7 @@ Version:	1.5
 Release:	%mkrel 4
 License:	GPL
 Group:		System/Libraries
-URL:		http://im-ja.sourceforge.net/
+URL:		https://im-ja.sourceforge.net/
 Source:		http://im-ja.sourceforge.net/%{name}-%{version}.tar.bz2
 Patch1:		im-ja-1.5-schemasdir.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-root
