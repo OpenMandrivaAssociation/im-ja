@@ -1,7 +1,7 @@
 Name:		im-ja
 Summary:	Japanese input module for GTK2
 Version:	1.5
-Release:	%mkrel 4
+Release:	5
 License:	GPL
 Group:		System/Libraries
 URL:		https://im-ja.sourceforge.net/
